@@ -175,12 +175,30 @@ def analytics_page():
     df["scan_no"] = range(1, len(df) + 1)
 
     fig2, ax2 = plt.subplots(figsize=(3.6, 2.4))
-    ax2.plot(df["scan_no"], df["confidence"], marker="o", linewidth=1.5, markersize=4)
+    ax2.plot(
+        df["scan_no"],
+        df["confidence"],
+        marker="o",
+        linewidth=1.8,
+        markersize=5
+    )
+
     ax2.set_title("Confidence Trend", fontsize=9)
     ax2.set_xlabel("Scan Number", fontsize=7)
     ax2.set_ylabel("Confidence (%)", fontsize=7)
-    ax2.set_ylim(0, 100)
+
+    # Zoom Y-axis so the graph does not look empty when confidence values are close together
+    min_conf = max(0, df["confidence"].min() - 5)
+    max_conf = min(100, df["confidence"].max() + 5)
+
+    if min_conf == max_conf:
+        min_conf = max(0, min_conf - 5)
+        max_conf = min(100, max_conf + 5)
+
+    ax2.set_ylim(min_conf, max_conf)
+
     ax2.tick_params(axis="both", labelsize=7)
+    ax2.grid(True, linestyle="--", alpha=0.3)
     plt.tight_layout()
 
     col1, col2, col3 = st.columns([1, 1.6, 1])
