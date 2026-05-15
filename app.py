@@ -26,6 +26,99 @@ def get_base64_image(image_path):
         return base64.b64encode(img_file.read()).decode()
 
 
+def apply_mobile_responsive_css():
+    st.markdown("""
+    <style>
+    /* =========================
+       GLOBAL MOBILE RESPONSIVE FIX
+       Works for phone without spoiling laptop
+    ========================= */
+
+    html, body, [data-testid="stAppViewContainer"] {
+        overflow-x: hidden !important;
+    }
+
+    @media (max-width: 768px) {
+
+        .block-container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+            padding-top: 1rem !important;
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
+
+        h1 {
+            font-size: 32px !important;
+            line-height: 1.15 !important;
+            word-break: break-word !important;
+        }
+
+        h2 {
+            font-size: 26px !important;
+            line-height: 1.2 !important;
+            word-break: break-word !important;
+        }
+
+        h3 {
+            font-size: 22px !important;
+            line-height: 1.2 !important;
+            word-break: break-word !important;
+        }
+
+        p, div, span, label {
+            max-width: 100% !important;
+        }
+
+        img {
+            max-width: 100% !important;
+            height: auto !important;
+        }
+
+        [data-testid="stHorizontalBlock"] {
+            flex-direction: column !important;
+        }
+
+        [data-testid="column"] {
+            width: 100% !important;
+            flex: 1 1 100% !important;
+        }
+
+        section[data-testid="stSidebar"] {
+            width: 270px !important;
+            min-width: 270px !important;
+        }
+
+        section[data-testid="stSidebar"] .sidebar-logo-title {
+            font-size: 22px !important;
+        }
+
+        section[data-testid="stSidebar"] .sidebar-logo-icon {
+            font-size: 42px !important;
+        }
+
+        section[data-testid="stSidebar"] [data-testid="stRadio"] label {
+            font-size: 14px !important;
+        }
+
+        .stButton button {
+            width: auto !important;
+            min-width: 160px !important;
+            max-width: 100% !important;
+        }
+
+        table {
+            font-size: 13px !important;
+        }
+
+        .stDataFrame {
+            overflow-x: auto !important;
+        }
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+
 def apply_logged_in_background():
     bg_image = get_base64_image("assets/smartpredictionbck.png")
 
@@ -45,6 +138,13 @@ def apply_logged_in_background():
     [data-testid="stHeader"],
     .block-container {{
         background: transparent !important;
+    }}
+
+    @media (max-width: 768px) {{
+        .stApp {{
+            background-attachment: scroll !important;
+            background-position: center top !important;
+        }}
     }}
     </style>
     """, unsafe_allow_html=True)
@@ -81,6 +181,7 @@ def dashboard_hero(user_name):
         display: flex;
         align-items: center;
         padding-left: 40px;
+        overflow-x: hidden;
     }}
 
     .hero-content {{
@@ -168,6 +269,117 @@ def dashboard_hero(user_name):
         font-weight: 800;
         color: white;
     }}
+
+    /* =========================
+       PHONE FIX FOR DASHBOARD HERO
+    ========================= */
+    @media (max-width: 768px) {{
+
+        .stApp {{
+            background-attachment: scroll !important;
+            background-position: center top !important;
+        }}
+
+        .block-container {{
+            padding-left: 0.8rem !important;
+            padding-right: 0.8rem !important;
+            padding-top: 0rem !important;
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }}
+
+        .hero-wrapper {{
+            min-height: auto !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            padding-top: 35px !important;
+            padding-bottom: 45px !important;
+            align-items: flex-start !important;
+            width: 100% !important;
+            overflow-x: hidden !important;
+        }}
+
+        .hero-content {{
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0 8px !important;
+            box-sizing: border-box !important;
+        }}
+
+        .hero-kicker {{
+            font-size: 12px !important;
+            letter-spacing: 1px !important;
+            margin-bottom: 12px !important;
+        }}
+
+        .hero-title {{
+            font-size: 42px !important;
+            line-height: 1.03 !important;
+            margin-bottom: 18px !important;
+            max-width: 100% !important;
+            word-break: normal !important;
+            overflow-wrap: break-word !important;
+        }}
+
+        .hero-welcome {{
+            font-size: 24px !important;
+            line-height: 1.2 !important;
+            margin-bottom: 14px !important;
+            max-width: 100% !important;
+            overflow-wrap: break-word !important;
+        }}
+
+        .hero-text {{
+            font-size: 15px !important;
+            line-height: 1.45 !important;
+            max-width: 100% !important;
+            margin-bottom: 20px !important;
+        }}
+
+        .typing-box {{
+            display: block !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 14px 16px !important;
+            margin-bottom: 20px !important;
+            box-sizing: border-box !important;
+        }}
+
+        .typing-main {{
+            font-size: 18px !important;
+            line-height: 1.25 !important;
+        }}
+
+        .typing-sub {{
+            font-size: 14px !important;
+            line-height: 1.4 !important;
+        }}
+
+        .feature-row {{
+            display: grid !important;
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
+            width: 100% !important;
+            max-width: 100% !important;
+        }}
+
+        .feature-card {{
+            font-size: 14px !important;
+            padding: 12px 14px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }}
+    }}
+
+    @media (max-width: 420px) {{
+        .hero-title {{
+            font-size: 36px !important;
+        }}
+
+        .hero-welcome {{
+            font-size: 22px !important;
+        }}
+    }}
     </style>
     """
 
@@ -201,6 +413,7 @@ def dashboard_hero(user_name):
 
 
 create_tables()
+apply_mobile_responsive_css()
 
 st.markdown("""
 <style>
@@ -331,6 +544,31 @@ section[data-testid="stSidebar"] button {
 section[data-testid="stSidebar"] button:hover {
     background: rgba(184,234,131,0.18) !important;
     border-color: rgba(184,234,131,0.55) !important;
+}
+
+/* Sidebar mobile improvement */
+@media (max-width: 768px) {
+    .sidebar-logo {
+        padding: 18px 6px 12px 6px !important;
+    }
+
+    .login-card {
+        padding: 14px !important;
+        border-radius: 18px !important;
+        font-size: 14px !important;
+    }
+
+    .sidebar-bottom {
+        margin-top: 18px !important;
+    }
+
+    .sidebar-leaf {
+        font-size: 56px !important;
+    }
+
+    .feedback-box {
+        padding: 12px !important;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
